@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    @font-face {
+        font-family: "篆";
+        src: url(./font/篆.ttf);
+    }
+    *{
+        margin:0;
+        padding:0;
+    }
+    body{
+        /* font-family:"篆"; */
+        background-color:#24262e;
+    }
+    header{
+        background-color:white;
+        font-size:40px;
+        text-align:center;
+        padding:20px;
+        color:#25262e;
+    }
+    .score{
+        border:3px solid #fff;
+        border-radius:10px;
+        width:200px;
+        margin:20px auto;
+        color:#fff;
+        text-align:center;
+        font-size:46px;
+        padding:15px 20px;
+        position:relative;
+    }
+    .score-label{
+        position:absolute;
+        color:#fff;
+        background-color:#e2584d;
+        font-size:25px;
+        padding: 5px 10px;
+    }
+    .user-label{
+        top:25px;
+        left:-18px;
+    }
+    .comp-label{
+        top:25px;
+        right:-38px;
+    }
+    .result{
+        text-align: center;
+        color:#fff;
+        margin-top:50px;
+        font-size:60px;
+        font-weight:bold;
+    }
+    .choices{
+        text-align:center;
+        margin-top:50px;
+    }
+    .choice{
+        display:inline-block;
+        margin:0 20px;  
+        cursor: pointer;     
+    }
+    .choice img{
+        border:4px solid #fff;
+        border-radius:50%;
+    }
+    .message{
+        text-align:center;
+        color:white;
+        margin-top:20px;
+        font-weight:bold;
+        font-size:35px;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>剪刀石头布</h1>
+    </header>
+    <div class="score">
+        <div class="user-label score-label">你</div>
+        <div class="comp-label score-label">电脑</div>
+        <span class="user-score">0</span>: <span class="comp-score">0</span>
+    </div>
+    <div class="result">
+        <p>石头 vs 布 你输了</p>
+    </div>
+    <div class="choices">
+        <div id="jd" class="choice"><img src="./img/jiandao.jpg" alt=""></div>
+        <div id="bu" class="choice"><img src="./img/bu.jpg" alt=""></div>
+        <div id="st" class="choice"><img src="./img/shitou.jpg" alt=""></div>
+    </div>
+    <p class="message">请做出选择</p>
+</body>
+<script>
+var jd = document.getElementById('jd');
+var bu = document.getElementById('bu');
+var st = document.getElementById('st');
+var p = document.getElementsByTagName('p')[0];
+var user_score = document.getElementsByClassName('user-score')[0];
+var com_score = document.getElementsByClassName('comp-score')[0];
+var u_score = 0;
+var c_score = 0;
+function show(user_val){    
+    var arr = ['jd','bu','st'];
+    var index = Math.floor(Math.random()*3);
+    var com_val = arr[index];
+    console.log(com_val);
+    console.log(user_val);
+    var obj = {
+        jd:'剪刀',
+        bu:'布',
+        st:'石头'
+    }
+    switch(user_val+com_val){
+        case 'jdjd':
+        case 'bubu':
+        case 'stst':
+            p.innerText = obj[user_val] + ' vs ' + obj[com_val] + ' 平局💩';
+            break;
+        case 'jdbu':
+        case 'bust':
+        case 'stjd':
+            u_score ++;
+            user_score.innerText = u_score;
+            p.innerText = obj[user_val] + ' vs ' + obj[com_val] + ' 你赢了😀';
+            break;
+        case 'jdst':
+        case 'stbu':
+        case 'bujd':
+            c_score ++;
+            com_score.innerText = c_score;
+            p.innerText = obj[user_val] + ' vs ' + obj[com_val] + ' 你输了😱';
+            break;
+    }
+    
+   
+}
+jd.addEventListener('click',function(){
+    show('jd');
+})
+bu.addEventListener('click',function(){
+    show('bu');
+})
+st.addEventListener('click',function(){
+    show('st');
+})
+
+
+
+
+
+</script>
+</html>
